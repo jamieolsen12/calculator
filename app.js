@@ -89,6 +89,19 @@ const actionButtons = [btnClear, btnAC, btnSolve];
 
 currentOpDisplay.textContent = num1String;
 
+// Event listeners
+//
+//  Add nums with for loop
+numberButtons.forEach((button) => {
+    button.addEventListener('click', event => {
+        if (operator) {
+            num2String += button.innerText;
+        } else {
+            num1String += button.innerText;
+            updateCurrentOpDisplay(num1String);
+        }
+    })
+})
 
 
 // Operator Functions
@@ -137,7 +150,9 @@ function num1ToInt(num1) {
 
 
 
-
+function updateCurrentOpDisplay(num1String) {
+    currentOpDisplay.innerText = num1String;
+}
 
 
 
