@@ -154,7 +154,7 @@ function updateCurrentOpDisplay(num1String) {
     currentOpDisplay.innerText = num1String;
 }
 
-//// git test
+
 
 
 
