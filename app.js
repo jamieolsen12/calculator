@@ -124,8 +124,8 @@ operatorButtons.forEach((button) => {
 
 // =/solve button event listener
 btnSolve.onclick = () => {
-    num1Int = parseInt(num1String);
-    num2Int = parseInt(num2String);
+    num1Int = parseFloat(num1String);
+    num2Int = parseFloat(num2String);
     console.log(operate(operator, num1Int, num2Int));
     answerDisplay.innerText = operate(operator, num1Int, num2Int);
 }
