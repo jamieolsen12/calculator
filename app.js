@@ -47,6 +47,7 @@
 // variables to be used
 let num1String = "";
 let num2String = "";
+let displayString = "";
 
 let operator = "";
 
@@ -94,14 +95,41 @@ currentOpDisplay.textContent = num1String;
 //  Add nums with for loop
 numberButtons.forEach((button) => {
     button.addEventListener('click', event => {
-        if (operator) {
+        if (operator.length >= 1) {
             num2String += button.innerText;
+            displayString += button.innerText;
+            updateCurrentOpDisplay();
+            console.log(displayString);
         } else {
             num1String += button.innerText;
-            updateCurrentOpDisplay(num1String);
+            displayString += button.innerText;
+            updateCurrentOpDisplay();
+            console.log(displayString);
         }
     })
 })
+
+// add operator event listeners
+
+console.log(operatorButtons);
+operatorButtons.forEach((button) => {
+    button.addEventListener('click', event => {
+        operator = button.innerText;
+        console.log(`Operator is *${operator}*`);
+        displayString += ` ${operator} `;
+        updateCurrentOpDisplay();
+    })
+})
+
+
+// = button event listener
+btnSolve.onclick = () => {
+    num1Int = parseInt(num1String);
+    num2Int = parseInt(num2String);
+    console.log(operate(operator, num1Int, num2Int));
+    answerDisplay.innerText = operate(operator, num1Int, num2Int);
+}
+
 
 
 // Operator Functions
@@ -121,9 +149,13 @@ function divide(a, b) {
     return (a / b)
 }
 
+function remainder(a, b) {
+    return (a % b)
+}
+
 function operate(operator, num1, num2) {
     let result;
-
+    console.log(`attempting to solve ${num1} ${operator} ${num2}`)
     switch(operator){
         case '+':
             result = add(num1, num2);
@@ -131,12 +163,14 @@ function operate(operator, num1, num2) {
         case '-':
             result = subtract(num1, num2);
             break;
-        case '*':
+        case 'x':
             result = multiply(num1, num2);
             break;
-        case '/':
+        case '÷':
             result = divide(num1, num2);
             break;
+        case '%':
+            result = remainder(num1, num2);
         default:
             console.log("Invalid Operator.");
     }
@@ -150,12 +184,13 @@ function num1ToInt(num1) {
 
 
 
-function updateCurrentOpDisplay(num1String) {
-    currentOpDisplay.innerText = num1String;
+function updateCurrentOpDisplay() {
+    currentOpDisplay.innerText = displayString;
 }
 
-
-
+function addOperatorToDisplay(operator) {
+    currentOpDisplay.innerText += ` ${operator} `;
+}
 
 
 
