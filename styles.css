@@ -1,0 +1,44 @@
+
+
+
+
+
+#calc-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 300px;
+    margin: auto;
+}
+
+#calc-display {
+    height: 100px;
+    border: 1px solid black;
+    width: 100%;
+    background-color: grey;
+}
+
+
+#calc-buttons {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+    width: 100%;
+}
+
+.button-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+button {
+    width: 60px;
+    height: 60px;
+    border-radius: 30px;
+}
+
+#equals-btn {
+    width: 140px;
+}
