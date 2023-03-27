@@ -30,9 +30,68 @@
 // 6. Your calculator should not evaluate more than a single pair of numbers at a time.
 
 
+// how to take variables as inputs
+
+// take in numbers as a string so each character is added one by one
+// once operator is pressed:
+//      Convert number string to integer
+//      store operator
+//      display both in current operation
+// take num2 same way
+// once = is pressed
+//      convert num2 into int
+//      solve using operate()
+//      display answer in answer box
+
+
+// variables to be used
+let num1String = "";
+let num2String = "";
+
+let operator = "";
+
+let num1Int = 0;
+let num2Int = 0;
+
+
+// Dom Elements
+const currentOpDisplay = document.getElementById('current-operation');
+const answerDisplay = document.getElementById('answer');
+
+const btn1 = document.getElementById('btn-1');
+const btn2 = document.getElementById('btn-2');
+const btn3 = document.getElementById('btn-3');
+const btn4 = document.getElementById('btn-4');
+const btn5 = document.getElementById('btn-5');
+const btn6 = document.getElementById('btn-6');
+const btn7 = document.getElementById('btn-7');
+const btn8 = document.getElementById('btn-8');
+const btn9 = document.getElementById('btn-9');
+const btn0 = document.getElementById('btn-0');
+const btnDecimal = document.getElementById('btn-.');
+
+const numberButtons = [btn0, btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9, btnDecimal];
+
+const btnAdd = document.getElementById('btn-+');
+const btnMultiply = document.getElementById('btn-x');
+const btnDivide = document.getElementById('btn-÷');
+const btnSubtract = document.getElementById('btn--');
+const btnModulo = document.getElementById('btn-%');
+
+const operatorButtons = [btnAdd, btnMultiply, btnDivide, btnSubtract, btnModulo];
+
+const btnClear = document.getElementById('btn-C');
+const btnAC = document.getElementById('btn-AC');
+const btnSolve = document.getElementById('btn-=');
+
+const actionButtons = [btnClear, btnAC, btnSolve];
+
+
+currentOpDisplay.textContent = num1String;
+
+
 
 // Operator Functions
-
 function add(a, b) {
     return (a + b)
 }
@@ -70,5 +129,17 @@ function operate(operator, num1, num2) {
     }
     return result;
 }
+
+// function to convert num1String into num1Int, called when operator is pressed
+function num1ToInt(num1) {
+    num1Int = parseInt(num1String);
+}
+
+
+
+
+
+
+
 
 

@@ -19,6 +19,18 @@
     background-color: grey;
 }
 
+#current-operation {
+    height: 50%;
+    text-align: end;
+    padding-right: 12px;
+}
+
+#answer {
+    height: 50%;
+    text-align: end;
+    padding-right: 12px;
+}
+
 
 #calc-buttons {
     display: flex;
@@ -39,6 +51,7 @@ button {
     border-radius: 30px;
 }
 
-#equals-btn {
+/* '=' button will be larger */
+#btn-\={
     width: 140px;
 }
