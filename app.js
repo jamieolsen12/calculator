@@ -140,6 +140,28 @@ btnAC.onclick = () => {
     answerDisplay.innerText = "";
 }
 
+btnClear.onclick = () => {
+    if (num2String.length >= 1) {
+        num2String = num2String.slice(0, -1);
+        displayString = displayString.slice(0, -1);
+        updateCurrentOpDisplay();
+    } else if (operator.length >= 1) {
+        operator = ""
+        console.log(`Change display string ${displayString} to`)
+        displayString = displayString.slice(0, -3);
+        console.log(`${displayString}`)
+        updateCurrentOpDisplay();
+    } else if (num1String.length >= 1) {
+        num1String = num1String.slice(0, -1);
+        displayString = displayString.slice(0, -1);
+        updateCurrentOpDisplay();
+    }
+    console.log(`num1 string is ${num1String}`);
+    console.log(`num2 string is ${num2String}`);
+    console.log(`operator is ${operator}`);
+    
+}
+
 
 
 // Operator Functions
