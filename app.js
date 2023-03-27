@@ -122,12 +122,22 @@ operatorButtons.forEach((button) => {
 })
 
 
-// = button event listener
+// =/solve button event listener
 btnSolve.onclick = () => {
     num1Int = parseInt(num1String);
     num2Int = parseInt(num2String);
     console.log(operate(operator, num1Int, num2Int));
     answerDisplay.innerText = operate(operator, num1Int, num2Int);
+}
+
+// clear whole operation
+btnAC.onclick = () => {
+    num1String = "";
+    num2String = "";
+    operator = "";
+    displayString = "";
+    updateCurrentOpDisplay();
+    answerDisplay.innerText = "";
 }
 
 
