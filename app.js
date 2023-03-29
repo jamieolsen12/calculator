@@ -1,53 +1,34 @@
 // Plan // 
 
-// 1. Create functions for basic operators 
-    // add
-    // subtract
-    // multiply
-    // divide
-// 1.1 test in browser console
-//
-// 2. Create variables for 3 sections of an operation
-//      variable a - first number
-//      variable b - operator
-//      variable c - second number
-//
-// 3. Create a new function operate that takes an operator and 2 numbers 
-//      and then calls one of the above functions on the numbers.
-// 
-// 4. Create calculator GUI in HTML
-//      4.1 Don't worry about it looking good
-//      4.2 Just make sure it works and can be customized later
-//      4.3 Make sure current operation is displayed correctly
-//      4.4 Add clear button
-// 5. Make the calculator work! 
-//      5.1 You’ll need to store the first number that is input into the calculator when a user 
-//          presses an operator, and also save which operation has been chosen and then operate() 
-//          on them when the user presses the “=” key.
-//      5.2 You should already have the code that can populate the display, so once operate() has been called, 
-//          update the display with the ‘solution’ to the operation.
-//      5.3 This part is hard
-// 6. Your calculator should not evaluate more than a single pair of numbers at a time.
 
 
-// how to take variables as inputs
 
-// take in numbers as a string so each character is added one by one
-// once operator is pressed:
-//      Convert number string to integer
-//      store operator
-//      display both in current operation
-// take num2 same way
-// once = is pressed
-//      convert num2 into int
-//      solve using operate()
-//      display answer in answer box
+// how to solve multiple operations at a time?
+
+// create array by seperating an entire operation string by " ". 
+// This creates an array like [1, 'x', 5, '+', 2, '-', 3]
+// getting operator indices
+// loop through array, calling operate() using each operator index, plus the index -1 for num1 and index +1 for num2
+// after solving, add result to result variable, splice the three indices from array
+// repeat until solved
+
+
+// 1. on Solve, displaystring into operationArray based on spaces
+// 2. Get operation indices within operationArray
+// 4. Create array with BODMAS to add order of operation
+// 5. Loop through this array to check if operation array includes the operator
+// 6. Solve using these operators first
+// 7. Call Operate() using indices and -+ 1
+// 8. Remove them from array
+// 9. Repeat until array empty
+// 10. Display result
 
 
 // variables to be used
 let num1String = "";
 let num2String = "";
 let displayString = "";
+let operationArray = [];
 
 let operator = "";
 
@@ -95,51 +76,70 @@ currentOpDisplay.textContent = num1String;
 //  Add nums with for loop
 numberButtons.forEach((button) => {
     button.addEventListener('click', event => {
-        if (operator.length >= 1) {
-            num2String += button.innerText;
-            displayString += button.innerText;
-            updateCurrentOpDisplay();
-            console.log(displayString);
-        } else {
-            num1String += button.innerText;
-            displayString += button.innerText;
-            updateCurrentOpDisplay();
-            console.log(displayString);
-        }
+        displayString += button.innerText;
+        updateCurrentOpDisplay();
+        // if (operator.length >= 1) {
+        //     num2String += button.innerText;
+        //     displayString += button.innerText;
+        //     updateCurrentOpDisplay();
+        //     console.log(displayString);
+        // } else {
+        //     num1String += button.innerText;
+        //     displayString += button.innerText;
+        //     updateCurrentOpDisplay();
+        //     console.log(displayString);
+        // }
     })
 })
 
 // add operator event listeners
-
 console.log(operatorButtons);
 operatorButtons.forEach((button) => {
     button.addEventListener('click', event => {
-        operator = button.innerText;
-        console.log(`Operator is *${operator}*`);
-        displayString += ` ${operator} `;
+        
+        displayString += ` ${button.innerText} `;
         updateCurrentOpDisplay();
+        
+        // // check if operator is empty
+        // if (operator === "") {    
+        //     operator = button.innerText;
+        //     console.log(`Operator is *${operator}*`);
+        //     displayString += ` ${operator} `;
+        //     updateCurrentOpDisplay();
+        // // if operator is already full, and there are num1 and num2, solve before adding another operator
+        // } else if (operator.length > 0) {
+
+        // }
     })
 })
 
 
 // =/solve button event listener
 btnSolve.onclick = () => {
-    num1Int = parseFloat(num1String);
-    num2Int = parseFloat(num2String);
-    console.log(operate(operator, num1Int, num2Int));
-    answerDisplay.innerText = operate(operator, num1Int, num2Int);
+    // num1Int = parseFloat(num1String);
+    // num2Int = parseFloat(num2String);
+    // console.log(operate(operator, num1Int, num2Int));
+    
+    // // solve, only showing 2 decimal places if there is a decimal, otherwise use int
+    // const result = operate(operator, num1Int, num2Int);
+    // const formattedResult = result % 1 !== 0 ? result.toFixed(2) : result;
+    // answerDisplay.innerText = formattedResult;
+    console.log(displayString);
+    equation = displayString.split(" ");
+    console.log(equation);
 }
 
 // clear whole operation
 btnAC.onclick = () => {
-    num1String = "";
-    num2String = "";
-    operator = "";
+    // num1String = "";
+    // num2String = "";
+    // operator = "";
     displayString = "";
     updateCurrentOpDisplay();
     answerDisplay.innerText = "";
 }
 
+// remove the last character from num1, num2, or operator, in which case remove operator and spaces
 btnClear.onclick = () => {
     if (num2String.length >= 1) {
         num2String = num2String.slice(0, -1);
@@ -213,7 +213,6 @@ function operate(operator, num1, num2) {
 function num1ToInt(num1) {
     num1Int = parseInt(num1String);
 }
-
 
 
 function updateCurrentOpDisplay() {
