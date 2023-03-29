@@ -24,10 +24,10 @@
 // 10. Display result
 
 
+
 // variables to be used
 
 let displayString = "";
-let operationArray = [];
 const orderOfOperations = ['/', 'x', '%', '+', '-'];
 
 
@@ -51,7 +51,7 @@ const numberButtons = [btn0, btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn
 
 const btnAdd = document.getElementById('btn-+');
 const btnMultiply = document.getElementById('btn-x');
-const btnDivide = document.getElementById('btn-÷');
+const btnDivide = document.getElementById('btn-/');
 const btnSubtract = document.getElementById('btn--');
 const btnModulo = document.getElementById('btn-%');
 
@@ -121,8 +121,23 @@ btnSolve.onclick = () => {
     // const formattedResult = result % 1 !== 0 ? result.toFixed(2) : result;
     // answerDisplay.innerText = formattedResult;
     console.log(displayString);
-    equation = displayString.split(" ");
-    console.log(equation);
+    equationArray = displayString.split(" ");
+    console.log(equationArray);
+    let result;
+    for (var i = 0; i < orderOfOperations.length; i++) {
+        while (equationArray.includes(orderOfOperations[i])) {
+            let operatorIndex = equationArray.findIndex(item => item === orderOfOperations[i]);
+            let currentOp = equationArray[operatorIndex]
+            let num1 = equationArray[operatorIndex - 1];
+            let num2 = equationArray[operatorIndex + 1]
+            result = operate(currentOp, num1, num2);
+            equationArray.splice((operatorIndex - 1), 3, result);
+            console.log(result);
+            console.log(`remaining equation array is ${equationArray}`)
+        }
+    }
+    answerDisplay.innerText = result;
+
 }
 
 // clear whole operation
@@ -199,6 +214,8 @@ function remainder(a, b) {
 
 function operate(operator, num1, num2) {
     let result;
+    num1 = parseFloat(num1);
+    num2 = parseFloat(num2);
     console.log(`attempting to solve ${num1} ${operator} ${num2}`)
     switch(operator){
         case '+':
@@ -210,7 +227,7 @@ function operate(operator, num1, num2) {
         case 'x':
             result = multiply(num1, num2);
             break;
-        case '÷':
+        case '/':
             result = divide(num1, num2);
             break;
         case '%':
