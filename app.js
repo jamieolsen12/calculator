@@ -2,6 +2,8 @@
 // FIX
 
 // display doesn't expand to accommodate longer operations
+// buttons arent equal size
+// dont allow multiple operators in a row
 
 
 // variables to be used

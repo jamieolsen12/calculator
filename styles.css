@@ -87,6 +87,8 @@ button {
 }
 
 
+
+
 .digit-btn:hover {
 	background: #bdbdbd;
 	color: #212121;
@@ -122,6 +124,13 @@ button {
     background: limegreen;
 	color: var(--white);
 	transform: translateY(-0.2rem);
+}
+
+.digit-btn:active, 
+.solve-btn:active,
+.clear-btn:active,
+.operator-btn:active {
+    transform: translateY(0rem);
 }
 
 /* '=' button will be larger */
