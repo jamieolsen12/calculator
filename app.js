@@ -2,29 +2,6 @@
 
 
 
-
-// how to solve multiple operations at a time?
-
-// create array by seperating an entire operation string by " ". 
-// This creates an array like [1, 'x', 5, '+', 2, '-', 3]
-// getting operator indices
-// loop through array, calling operate() using each operator index, plus the index -1 for num1 and index +1 for num2
-// after solving, add result to result variable, splice the three indices from array
-// repeat until solved
-
-
-// 1. on Solve, displaystring into operationArray based on spaces
-// 2. Get operation indices within operationArray
-// 4. Create array with BODMAS to add order of operation
-// 5. Loop through this array to check if operation array includes the operator
-// 6. Solve using these operators first
-// 7. Call Operate() using indices and -+ 1
-// 8. Remove them from array
-// 9. Repeat until array empty
-// 10. Display result
-
-
-
 // variables to be used
 
 let displayString = "";
@@ -74,17 +51,7 @@ numberButtons.forEach((button) => {
         displayString += button.innerText;
         updateCurrentOpDisplay();
 
-        // if (operator.length >= 1) {
-        //     num2String += button.innerText;
-        //     displayString += button.innerText;
-        //     updateCurrentOpDisplay();
-        //     console.log(displayString);
-        // } else {
-        //     num1String += button.innerText;
-        //     displayString += button.innerText;
-        //     updateCurrentOpDisplay();
-        //     console.log(displayString);
-        // }
+    
     })
 })
 
@@ -95,31 +62,13 @@ operatorButtons.forEach((button) => {
         
         displayString += ` ${button.innerText} `;
         updateCurrentOpDisplay();
-        
-        // // check if operator is empty
-        // if (operator === "") {    
-        //     operator = button.innerText;
-        //     console.log(`Operator is *${operator}*`);
-        //     displayString += ` ${operator} `;
-        //     updateCurrentOpDisplay();
-        // // if operator is already full, and there are num1 and num2, solve before adding another operator
-        // } else if (operator.length > 0) {
-
-        // }
+    
     })
 })
 
 
 // =/solve button event listener
 btnSolve.onclick = () => {
-    // num1Int = parseFloat(num1String);
-    // num2Int = parseFloat(num2String);
-    // console.log(operate(operator, num1Int, num2Int));
-    
-    // // solve, only showing 2 decimal places if there is a decimal, otherwise use int
-    // const result = operate(operator, num1Int, num2Int);
-    // const formattedResult = result % 1 !== 0 ? result.toFixed(2) : result;
-    // answerDisplay.innerText = formattedResult;
     console.log(displayString);
     equationArray = displayString.split(" ");
     console.log(equationArray);
@@ -142,9 +91,6 @@ btnSolve.onclick = () => {
 
 // clear whole operation
 btnAC.onclick = () => {
-    // num1String = "";
-    // num2String = "";
-    // operator = "";
     displayString = "";
     updateCurrentOpDisplay();
     answerDisplay.innerText = "";
@@ -163,29 +109,6 @@ btnClear.onclick = () => {
     }
     console.log(displayString);
     updateCurrentOpDisplay();
-
-
-    
-
-   
-    // if (num2String.length >= 1) {
-    //     num2String = num2String.slice(0, -1);
-    //     displayString = displayString.slice(0, -1);
-    //     updateCurrentOpDisplay();
-    // } else if (operator.length >= 1) {
-    //     operator = ""
-    //     console.log(`Change display string ${displayString} to`)
-    //     displayString = displayString.slice(0, -3);
-    //     console.log(`${displayString}`)
-    //     updateCurrentOpDisplay();
-    // } else if (num1String.length >= 1) {
-    //     num1String = num1String.slice(0, -1);
-    //     displayString = displayString.slice(0, -1);
-    //     updateCurrentOpDisplay();
-    // }
-    // console.log(`num1 string is ${num1String}`);
-    // console.log(`num2 string is ${num2String}`);
-    // console.log(`operator is ${operator}`);
     
 }
 
