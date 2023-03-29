@@ -3,7 +3,10 @@
 
 // steps left
 
-// add keyboard event listeners
+// figure out solution to display if user doesn't clear current operation
+// figure out clear buttons
+//      if answer box is full, and user starts typing, call clear automatically?
+//      
 
 // finish GUI 
 
@@ -58,7 +61,10 @@ const actionButtons = [btnClear, btnAC, btnSolve];
 //  Add nums with for loop
 numberButtons.forEach((button) => {
     button.addEventListener('click', event => {
-
+        // check if there is already an operation and answer displayed, if so, clear it first
+        if (answerDisplay.innerText.length >= 1) {
+            allClear();
+        }
         displayString += button.innerText;
         updateCurrentOpDisplay();
 
@@ -70,7 +76,7 @@ numberButtons.forEach((button) => {
 console.log(operatorButtons);
 operatorButtons.forEach((button) => {
     button.addEventListener('click', event => {
-        
+    
         displayString += ` ${button.innerText} `;
         updateCurrentOpDisplay();
     
@@ -96,15 +102,17 @@ btnSolve.onclick = () => {
             console.log(`remaining equation array is ${equationArray}`)
         }
     }
-    answerDisplay.innerText = (result.toFixed(2));
+    if (String(result).includes('.')) {
+        answerDisplay.innerText = (result.toFixed(2));
+    } else {
+        answerDisplay.innerText = result;
+    }
 
 }
 
 // clear whole operation
 btnAC.onclick = () => {
-    displayString = "";
-    updateCurrentOpDisplay();
-    answerDisplay.innerText = "";
+    allClear();
 }
 
 // remove the last character from num1, num2, or operator, in which case remove operator and spaces
@@ -127,12 +135,17 @@ btnClear.onclick = () => {
 // keydown event listeners 
 document.addEventListener('keydown', (event) => {
     if (numStrings.includes(event.key)) {
+        // check if there is already an operation and answer displayed, if so, clear it first
+        if (answerDisplay.innerText.length >= 1) {
+            allClear();
+        }
         displayString += event.key;
         updateCurrentOpDisplay();
     } else if (orderOfOperations.includes(event.key) || event.key === '*') {
         // in case user selects '*' instead of 'x'
         if  (event.key === '*') {
             displayString += ` ${'x'} `;
+            updateCurrentOpDisplay();
         } else {
             displayString += ` ${event.key} `;
             updateCurrentOpDisplay();
@@ -156,20 +169,30 @@ document.addEventListener('keydown', (event) => {
                 console.log(`remaining equation array is ${equationArray}`)
             }
         }
-        answerDisplay.innerText = (result.toFixed(2));
+        // check if there is a decimal, if so, round to 2 places, otherwise ignore
+        if (String(result).includes('.')) {
+            answerDisplay.innerText = (result.toFixed(2));
+        } else {
+            answerDisplay.innerText = result;
+        }
+        
     } else if (event.key === "Backspace") {
-        // same code as clear
-        console.log(displayString);
-        if (displayString.charAt(displayString.length - 1) === " ") {
+        if (answerDisplay.innerText >= 1) {
+            allClear();
+        } else {
+            // same code as clear
+            console.log(displayString);
+            if (displayString.charAt(displayString.length - 1) === " ") {
+                displayString = displayString.slice(0, -1);
+            }
+            console.log(displayString);
             displayString = displayString.slice(0, -1);
+            if (displayString.charAt(displayString.length - 1) === " ") {
+                displayString = displayString.slice(0, -1);
+            }
+            console.log(displayString);
+            updateCurrentOpDisplay();
         }
-        console.log(displayString);
-        displayString = displayString.slice(0, -1);
-        if (displayString.charAt(displayString.length - 1) === " ") {
-            displayString = displayString.slice(0, -1);
-        }
-        console.log(displayString);
-        updateCurrentOpDisplay();
     } else if (event.key === 'c' || event.key === 'C') {
         displayString = "";
         updateCurrentOpDisplay();
@@ -223,6 +246,12 @@ function operate(operator, num1, num2) {
             console.log("Invalid Operator.");
     }
     return result;
+}
+
+function allClear() {
+    displayString = "";
+    updateCurrentOpDisplay();
+    answerDisplay.innerText = "";
 }
 
 
