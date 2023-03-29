@@ -25,15 +25,10 @@
 
 
 // variables to be used
-let num1String = "";
-let num2String = "";
+
 let displayString = "";
 let operationArray = [];
-
-let operator = "";
-
-let num1Int = 0;
-let num2Int = 0;
+const orderOfOperations = ['/', 'x', '%', '+', '-'];
 
 
 // Dom Elements
@@ -69,15 +64,16 @@ const btnSolve = document.getElementById('btn-=');
 const actionButtons = [btnClear, btnAC, btnSolve];
 
 
-currentOpDisplay.textContent = num1String;
 
 // Event listeners
 //
 //  Add nums with for loop
 numberButtons.forEach((button) => {
     button.addEventListener('click', event => {
+
         displayString += button.innerText;
         updateCurrentOpDisplay();
+
         // if (operator.length >= 1) {
         //     num2String += button.innerText;
         //     displayString += button.innerText;
@@ -141,24 +137,40 @@ btnAC.onclick = () => {
 
 // remove the last character from num1, num2, or operator, in which case remove operator and spaces
 btnClear.onclick = () => {
-    if (num2String.length >= 1) {
-        num2String = num2String.slice(0, -1);
+   console.log(displayString);
+    if (displayString.charAt(displayString.length - 1) === " ") {
         displayString = displayString.slice(0, -1);
-        updateCurrentOpDisplay();
-    } else if (operator.length >= 1) {
-        operator = ""
-        console.log(`Change display string ${displayString} to`)
-        displayString = displayString.slice(0, -3);
-        console.log(`${displayString}`)
-        updateCurrentOpDisplay();
-    } else if (num1String.length >= 1) {
-        num1String = num1String.slice(0, -1);
-        displayString = displayString.slice(0, -1);
-        updateCurrentOpDisplay();
     }
-    console.log(`num1 string is ${num1String}`);
-    console.log(`num2 string is ${num2String}`);
-    console.log(`operator is ${operator}`);
+    console.log(displayString);
+    displayString = displayString.slice(0, -1);
+    if (displayString.charAt(displayString.length - 1) === " ") {
+        displayString = displayString.slice(0, -1);
+    }
+    console.log(displayString);
+    updateCurrentOpDisplay();
+
+
+    
+
+   
+    // if (num2String.length >= 1) {
+    //     num2String = num2String.slice(0, -1);
+    //     displayString = displayString.slice(0, -1);
+    //     updateCurrentOpDisplay();
+    // } else if (operator.length >= 1) {
+    //     operator = ""
+    //     console.log(`Change display string ${displayString} to`)
+    //     displayString = displayString.slice(0, -3);
+    //     console.log(`${displayString}`)
+    //     updateCurrentOpDisplay();
+    // } else if (num1String.length >= 1) {
+    //     num1String = num1String.slice(0, -1);
+    //     displayString = displayString.slice(0, -1);
+    //     updateCurrentOpDisplay();
+    // }
+    // console.log(`num1 string is ${num1String}`);
+    // console.log(`num2 string is ${num2String}`);
+    // console.log(`operator is ${operator}`);
     
 }
 
