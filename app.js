@@ -110,16 +110,21 @@ btnAC.onclick = () => {
 // remove the last character from num1, num2, or operator, in which case remove operator and spaces
 btnClear.onclick = () => {
    console.log(displayString);
+    // check if last char is a space, if so, remove
     if (displayString.charAt(displayString.length - 1) === " ") {
         displayString = displayString.slice(0, -1);
     }
     console.log(displayString);
     displayString = displayString.slice(0, -1);
+    // check again if there is a space, as operator will always have spaces around it
     if (displayString.charAt(displayString.length - 1) === " ") {
         displayString = displayString.slice(0, -1);
     }
     console.log(displayString);
     updateCurrentOpDisplay();
+    if (displayString.length === 0) {
+        allClear();
+    }
     
 }
 
@@ -184,6 +189,9 @@ document.addEventListener('keydown', (event) => {
             }
             console.log(displayString);
             updateCurrentOpDisplay();
+            if (displayString.length === 0) {
+                allClear();
+            }
         }
     } else if (event.key === 'c' || event.key === 'C') {
         allClear();
@@ -242,7 +250,7 @@ function allClear() {
     displayString = "";
     updateCurrentOpDisplay();
     answerDisplay.innerText = "";
-    currentOpDisplay.innerText = "0"
+    currentOpDisplay.innerText = "0";
 }
 
 
