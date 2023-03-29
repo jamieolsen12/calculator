@@ -12,6 +12,11 @@
 
 let displayString = "";
 const orderOfOperations = ['/', 'x', '%', '+', '-'];
+const numStrings = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+
+// turn off listening mode until user clears current answer
+var listenMode = true;
+
 
 
 // Dom Elements
@@ -91,7 +96,7 @@ btnSolve.onclick = () => {
             console.log(`remaining equation array is ${equationArray}`)
         }
     }
-    answerDisplay.innerText = result;
+    answerDisplay.innerText = (result.toFixed(2));
 
 }
 
@@ -118,6 +123,59 @@ btnClear.onclick = () => {
     
 }
 
+
+// keydown event listeners 
+document.addEventListener('keydown', (event) => {
+    if (numStrings.includes(event.key)) {
+        displayString += event.key;
+        updateCurrentOpDisplay();
+    } else if (orderOfOperations.includes(event.key) || event.key === '*') {
+        // in case user selects '*' instead of 'x'
+        if  (event.key === '*') {
+            displayString += ` ${'x'} `;
+        } else {
+            displayString += ` ${event.key} `;
+            updateCurrentOpDisplay();
+        }
+
+    } else if (event.key === '=' || event.key === 'Enter') {
+        // same code as solve button
+        console.log(displayString);
+        equationArray = displayString.split(" ");
+        console.log(equationArray);
+        let result;
+        for (var i = 0; i < orderOfOperations.length; i++) {
+            while (equationArray.includes(orderOfOperations[i])) {
+                let operatorIndex = equationArray.findIndex(item => item === orderOfOperations[i]);
+                let currentOp = equationArray[operatorIndex]
+                let num1 = equationArray[operatorIndex - 1];
+                let num2 = equationArray[operatorIndex + 1]
+                result = operate(currentOp, num1, num2);
+                equationArray.splice((operatorIndex - 1), 3, result);
+                console.log(result);
+                console.log(`remaining equation array is ${equationArray}`)
+            }
+        }
+        answerDisplay.innerText = (result.toFixed(2));
+    } else if (event.key === "Backspace") {
+        // same code as clear
+        console.log(displayString);
+        if (displayString.charAt(displayString.length - 1) === " ") {
+            displayString = displayString.slice(0, -1);
+        }
+        console.log(displayString);
+        displayString = displayString.slice(0, -1);
+        if (displayString.charAt(displayString.length - 1) === " ") {
+            displayString = displayString.slice(0, -1);
+        }
+        console.log(displayString);
+        updateCurrentOpDisplay();
+    } else if (event.key === 'c' || event.key === 'C') {
+        displayString = "";
+        updateCurrentOpDisplay();
+        answerDisplay.innerText = "";
+    }
+})
 
 
 // Operator Functions
