@@ -1,6 +1,12 @@
 // Plan // 
 
 
+// steps left
+
+// add keyboard event listeners
+
+// finish GUI 
+
 
 // variables to be used
 
@@ -161,19 +167,12 @@ function operate(operator, num1, num2) {
     return result;
 }
 
-// function to convert num1String into num1Int, called when operator is pressed
-function num1ToInt(num1) {
-    num1Int = parseInt(num1String);
-}
 
 
 function updateCurrentOpDisplay() {
     currentOpDisplay.innerText = displayString;
 }
 
-function addOperatorToDisplay(operator) {
-    currentOpDisplay.innerText += ` ${operator} `;
-}
 
 
 
