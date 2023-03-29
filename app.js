@@ -1,9 +1,7 @@
-// Plan // 
 
+// FIX
 
-// steps left
-
-// finish GUI 
+// display doesn't expand to accommodate longer operations
 
 
 // variables to be used
@@ -188,9 +186,7 @@ document.addEventListener('keydown', (event) => {
             updateCurrentOpDisplay();
         }
     } else if (event.key === 'c' || event.key === 'C') {
-        displayString = "";
-        updateCurrentOpDisplay();
-        answerDisplay.innerText = "";
+        allClear();
     }
 })
 

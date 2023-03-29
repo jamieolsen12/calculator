@@ -1,6 +1,9 @@
 
 
-
+body {
+    background-color: beige;
+    font-family: 'Quicksand', sans-serif;
+}
 
 
 #calc-container {
@@ -8,8 +11,13 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 300px;
+    width: 250px;
     margin: auto;
+    margin-top: 200px;
+    padding: 20px;
+    border: 1px solid black;
+    background-color: black;
+    border-radius: 15px;
 }
 
 #calc-display {
@@ -23,6 +31,8 @@
     height: 50%;
     text-align: end;
     padding-right: 12px;
+    padding-top: 12px;
+    font-size: 1.25rem;
 }
 
 #answer {
@@ -43,6 +53,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+    margin: 1px;
 }
 
 button {
@@ -53,5 +64,5 @@ button {
 
 /* '=' button will be larger */
 #btn-0{
-    width: 140px;
+    width: 50%
 }
