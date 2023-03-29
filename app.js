@@ -3,11 +3,6 @@
 
 // steps left
 
-// figure out solution to display if user doesn't clear current operation
-// figure out clear buttons
-//      if answer box is full, and user starts typing, call clear automatically?
-//      
-
 // finish GUI 
 
 
@@ -19,7 +14,6 @@ const numStrings = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
 
 // turn off listening mode until user clears current answer
 var listenMode = true;
-
 
 
 // Dom Elements
@@ -252,6 +246,7 @@ function allClear() {
     displayString = "";
     updateCurrentOpDisplay();
     answerDisplay.innerText = "";
+    currentOpDisplay.innerText = "0"
 }
 
 
